@@ -1,0 +1,24 @@
+.button {
+  height: 100%;
+  width: 25%;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  color: black;
+  border: none;
+}
+
+.button:hover {
+  background-color: #6b6969;
+}
+
+.wide {
+  width: 50%;
+}
+
+.orange {
+  background-color: #f5923e;
+  color: white;
+}

@@ -1,0 +1,12 @@
+.row {
+  display: flex;
+  height: 16%;
+}
+
+.wide {
+  width: 50%;
+}
+
+.orange {
+  background-color: #f5923e
+}

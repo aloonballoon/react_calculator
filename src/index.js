@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Calculator } from './Calculator';
 
-ReactDOM.render(<h1>React Template</h1>, document.getElementById('root'));
+ReactDOM.render(<Calculator />, document.getElementById('root'));
