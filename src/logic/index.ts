@@ -6,28 +6,66 @@ export const eventHandler = (state, setState) => {
     '÷': (val1, val2) => val1 / val2,
   };
   return (val) => {
-    console.log({ val });
-    const { total, current, next } = state;
+    const { total, display, operation, clear, decimal } = state;
     if (val === 'AC') {
-      return setState({ current: 0, next: null, total: 0 });
+      return setState({
+        display: 0,
+        operation: null,
+        total: 0,
+        decimal: false,
+        clear: false,
+      });
+    } else if (val === '+/-') {
+      return setState({ ...state, display: -state.display });
     } else if (operations[val]) {
-      if ((current === 0 || current) && !next) {
-        return setState({ ...state, next: val });
+      if (!operation) {
+        setState({ ...state, operation: val, clear: true, total: display });
       } else {
-        return setState({
+        const newTotal = operations[operation](total, display);
+        setState({
           ...state,
-          next: null,
-          total: operations[val](total, current),
+          total: newTotal,
+          display: newTotal,
+          operation: val,
+          clear: true,
+          decimal: false,
         });
       }
     } else if (typeof val === 'number') {
-      if (next === 0 || next) {
-        return setState({...state, current: val})
+      if (operation && clear) {
+        setState({ ...state, clear: false, display: val });
+      } else if (decimal) {
+        setState({
+          ...state,
+          display: Number(String(state.display) + '.' + String(val)),
+          decimal: false,
+        });
+      } else {
+        setState({
+          ...state,
+          display: Number(String(state.display) + String(val)),
+        });
       }
-      const newNumber = String(state.current) + val;
-      return setState({ ...state, current: Number(newNumber) });
-    } else if (val === '+/-') {
-      return setState({ ...state, current: -state.current });
+    } else if (val === '=' && operation) {
+      const newTotal = operations[operation](total, display);
+      return setState({
+        ...state,
+        total: newTotal,
+        display: newTotal,
+        clear: false,
+        operation: null,
+        decimal: false,
+      });
+    } else if (val === '%') {
+      return setState({
+        ...state,
+        display: display / 100,
+      });
+    } else if (val === '.') {
+      return setState({
+        ...state,
+        decimal: true,
+      });
     }
   };
 };

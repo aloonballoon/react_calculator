@@ -5,14 +5,16 @@ import { eventHandler } from '../../logic';
 
 export const Calculator: React.FC = () => {
   const [state, setState] = useState({
-    current: 0,
+    display: 0,
     total: 0,
-    next: null,
+    operation: null,
+    clear: false,
+    decimal: false,
   });
-  console.log({ state });
+
   return (
     <>
-      <Display value={state.current} />
+      <Display value={state.display} />
       <ButtonPanel onClick={eventHandler(state, setState)} />
     </>
   );
