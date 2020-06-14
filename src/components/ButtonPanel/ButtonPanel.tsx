@@ -24,9 +24,9 @@ export const ButtonPanel: React.FC<ButtonPanelProps> = ({ onClick }) => {
         <Button value='-' onClick={onClick} orange />
       </div>
       <div className={styles.row}>
-        <Button value={3} onClick={onClick} />
-        <Button value={2} onClick={onClick} />
         <Button value={1} onClick={onClick} />
+        <Button value={2} onClick={onClick} />
+        <Button value={3} onClick={onClick} />
         <Button value='+' onClick={onClick} orange />
       </div>
       <div className={styles.row}>
