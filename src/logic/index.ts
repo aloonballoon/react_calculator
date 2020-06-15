@@ -1,11 +1,11 @@
-export const eventHandler = (state, setState) => {
+export const eventHandler = (state, setState): Function => {
   const operations = {
     x: (val1, val2) => val1 * val2,
     '-': (val1, val2) => val1 - val2,
     '+': (val1, val2) => val1 + val2,
     '÷': (val1, val2) => val1 / val2,
   };
-  return (val) => {
+  return (val: string | number): null => {
     const { total, display, operation, clear, decimal } = state;
     if (val === 'AC') {
       return setState({
@@ -19,10 +19,15 @@ export const eventHandler = (state, setState) => {
       return setState({ ...state, display: -state.display });
     } else if (operations[val]) {
       if (!operation) {
-        setState({ ...state, operation: val, clear: true, total: display });
+        return setState({
+          ...state,
+          operation: val,
+          clear: true,
+          total: display,
+        });
       } else {
         const newTotal = operations[operation](total, display);
-        setState({
+        return setState({
           ...state,
           total: newTotal,
           display: newTotal,
@@ -33,15 +38,15 @@ export const eventHandler = (state, setState) => {
       }
     } else if (typeof val === 'number') {
       if (operation && clear) {
-        setState({ ...state, clear: false, display: val });
+        return setState({ ...state, clear: false, display: val });
       } else if (decimal) {
-        setState({
+        return setState({
           ...state,
           display: Number(String(state.display) + '.' + String(val)),
           decimal: false,
         });
       } else {
-        setState({
+        return setState({
           ...state,
           display: Number(String(state.display) + String(val)),
         });
