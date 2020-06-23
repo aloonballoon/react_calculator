@@ -1,3 +1,1 @@
-# React-Template
-
-Simple React template. Can optionally use CSS modules and TypeScript
+React Calculator meant to look like the iPhone calculator
